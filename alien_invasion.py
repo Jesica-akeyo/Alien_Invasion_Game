@@ -18,7 +18,7 @@ class AlienInvasion:
 
         #make a ship
         self.ship = Ship(self)
-        self.bullet = pygame.sprite.Group()
+        self.bullets = pygame.sprite.Group()
 
         # Set the background color.
         self.bg_color = (230,230,230)
@@ -28,7 +28,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullet.update()          
+            self._update_bullets()
             self._update_screen()
             
     def _check_events(self):#helper method
@@ -65,15 +65,27 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the group"""
-        new_bullet = Bullet(self)
-        self.bullet.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update the position of bullets and get rid of old bullets"""
+        #Update bullet position
+        self.bullets.update()
+
+        #Get rid of bullets that disappear
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0: #the bottom of the bullet reach te top of screen
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
 
     def _update_screen(self):
          """Update images on the screen, and flip to the new screen"""
          # Redraw the screen during each pass through theloop
          self.screen.fill(self.settings.bg_color)
          self.ship.blitme()
-         for bullet in self.bullet.sprites():
+         for bullet in self.bullets.sprites():
              bullet.draw_bullet()
 
          # Make the most recently drawn screen visible.
