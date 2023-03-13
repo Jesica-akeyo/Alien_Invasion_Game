@@ -88,7 +88,6 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0: #the bottom of the bullet reach te top of screen
                 self.bullets.remove(bullet)
-        print(len(self.bullets))
 
     def _update_screen(self):
          
