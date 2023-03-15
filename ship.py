@@ -13,7 +13,7 @@ class Ship:
         self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
 
-        #Start ecah new ship at the bottom center of the screen
+        #Start each new ship at the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
         #Store a decimal value for the ship's horizontal position
