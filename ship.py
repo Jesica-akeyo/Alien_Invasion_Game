@@ -4,8 +4,10 @@ class Ship:
     """ A class to manage the ship"""
 
     def __init__(self, ai_game):
-        """Initialize the ship and set its starting location"""
+        """ we are taking two parameters """
+        """ Initialize the ship and set its starting location """
         self.screen = ai_game.screen
+        #we want the screen of the ship to match with the screen of the shape
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
 

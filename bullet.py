@@ -1,9 +1,10 @@
 import pygame
-from pygame.sprite import Sprite
+from pygame.sprite import Sprite 
+#sprite is a way of creating a group like a game, like creating a group of bullets.
 
 class Bullet(Sprite):
     """A class to manage bullets fired from ship"""
-
+    
     def __init__(self, ai_game):
         """Create a bullet object at the ship's current position"""
         super().__init__()
@@ -21,7 +22,7 @@ class Bullet(Sprite):
     def update(self):
         """Move the bullet up the screen"""
         #Update the decimal position of the bullet
-        self.y -= self.settings.bullet_speed
+        self.y -= self.settings.bullet_speed # moving up towards y direction thus subtracting
         #Update the rect position
         self.rect.y = self.y
 
