@@ -89,6 +89,19 @@ class AlienInvasion:
         for row_number in range(number_rows):
             for alien_number in range(number_alien_x):
                 self._create_alien(alien_number, row_number)
+
+    def _check_fleet_edges(self):
+        """Respond to alien reaching edge"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """Drop the entire fleet and change its direction"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
             
     def _create_alien(self, alien_number, row_number):
         #Create an alien and place it in the row
@@ -98,6 +111,17 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        """Check if the fleet is at the edge,
+        then update the positions of all aliens in the fleet"""
+        self._check_fleet_edges()
+        self.aliens.update()
+
+        #Look for alien ship collision
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!")
+
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the group"""
@@ -118,7 +142,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _check_bullet_alien_collisions(self):
-        """Resonf to bullet/alien collisions"""
+        """Respond to bullet/alien collisions"""
 
         #Check for any bullets that have hit an alien
         #if so,get rif of the bullet and the alien
