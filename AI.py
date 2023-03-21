@@ -7,15 +7,16 @@ import keras.utils
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # defining the model architecture
 model = tf.keras.Sequential()
 model.add(layers.Dense(32, activation='relu',
-          input_shape=(None, None, 11, 17487)))
+input_shape=(None, None, 11, 17487)))
 model.add(layers.Dense(32, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.add(Flatten())
 model.compile(optimizer='rmsprop', loss='binary_crossentropy',
-              metrics=['accuracy'])
+metrics=['accuracy'])
 
 # loading the data into the model
 # load mental health data from a numpy array file
@@ -23,7 +24,7 @@ stats = np.load('stats_data.npy')
 scores = stats[0]
 level = stats[1]
 X = [stats[0], 121850, 83610, 55560, 36860, 23820,
-     14740, 9450, 5590, 2900, 1100, 0]  # input features
+14740, 9450, 5590, 2900, 1100, 0]  # input features
 y = [stats[1], 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # target labels
 
 

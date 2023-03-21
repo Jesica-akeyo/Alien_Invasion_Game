@@ -1,0 +1,28 @@
+#second idea
+
+import subprocess
+for x in ('p1', 'p2', 'p3'):
+    p = multiprocessing.Process(target=lambda: __import__(x))
+    p.start()
+
+
+
+
+	path = r"C:\Users\user\Alien_Invasion_Game"
+tasks = ['yora.py',  'AI.py']
+len = tasks.__len__()
+ind = 0
+for i in range(len):
+    os.system('python' + ' ' + tasks[ind])
+    ind += 1
+time.sleep(1)
+print("hello")
+path = r"C:\Users\Max\Desktop\python\tasks"
+tasks = ['1.py', '2.py', '3.py']
+task_processes = [
+    subprocess.Popen(r'python %s\%s' % (path, task), shell=True)
+    for task
+    in tasks
+]
+for task in task_processes:
+    task.wait()
